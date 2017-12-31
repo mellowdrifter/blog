@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package greeting;
+
+service greetuser {
+    rpc get_greeting(person) returns (greeting); 
+}
+
+message person {
+    string name = 1;
+}
+
+message greeting {
+    string greeting = 1;
+}

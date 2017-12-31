@@ -1,0 +1,9 @@
+// file ip.proto
+syntax = "proto3";
+
+package main;
+
+message prefix {
+    string address = 1;
+    uint32 mask = 2;
+}
