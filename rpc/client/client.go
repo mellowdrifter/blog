@@ -6,12 +6,12 @@ import (
 	"log"
 	"os"
 
-	pb "github.com/mellowdrifter/blog/proto/greeting"
+	pb "github.com/mellowdrifter/blog/rpc/proto/greeting"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	conn, err := grpc.Dial("localhost:1080", grpc.WithInsecure())
+	conn, err := grpc.Dial("10.20.30.30:1080", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Failed to connect to gRPC server: %v", err)
 	}
