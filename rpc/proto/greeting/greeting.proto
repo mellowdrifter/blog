@@ -8,8 +8,11 @@ service greetuser {
 
 message person {
     string name = 1;
+    uint32 age = 2;
 }
 
 message greeting {
     string greeting = 1;
+    string day = 2;
+    string year = 3;
 }

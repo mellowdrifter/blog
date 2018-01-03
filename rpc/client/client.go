@@ -11,7 +11,9 @@ import (
 )
 
 func main() {
-	conn, err := grpc.Dial("10.20.30.30:1080", grpc.WithInsecure())
+	server := fmt.Sprintf("%v:1080", os.Args[1])
+	fmt.Printf("Connecting to %v\n", server)
+	conn, err := grpc.Dial(server, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Failed to connect to gRPC server: %v", err)
 	}
@@ -19,10 +21,15 @@ func main() {
 
 	client := pb.NewGreetuserClient(conn)
 
-	name := os.Args[1]
-	resp, err := client.GetGreeting(context.Background(), &pb.Person{Name: name})
-	if err != nil {
-		log.Fatalf("Received an error from gRPC server: %v", err)
+	name := os.Args[2]
+	for i := 0; i < 100; i++ {
+		resp, err := client.GetGreeting(context.Background(), &pb.Person{
+			Name: name,
+			Age:  36,
+		})
+		if err != nil {
+			log.Fatalf("Received an error from gRPC server: %v", err)
+		}
+		fmt.Printf("%s", resp.GetGreeting())
 	}
-	fmt.Printf("%s", resp.GetGreeting())
 }
