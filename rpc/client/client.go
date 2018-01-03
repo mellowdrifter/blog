@@ -25,11 +25,11 @@ func main() {
 	for i := 0; i < 100; i++ {
 		resp, err := client.GetGreeting(context.Background(), &pb.Person{
 			Name: name,
-			Age:  36,
+			Age:  uint32(i),
 		})
 		if err != nil {
 			log.Fatalf("Received an error from gRPC server: %v", err)
 		}
-		fmt.Printf("%s", resp.GetGreeting())
+		fmt.Printf("%s. Today is %v and the year is %v\n", resp.GetGreeting(), resp.GetDay(), resp.GetYear())
 	}
 }
